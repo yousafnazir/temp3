@@ -7,50 +7,51 @@
     <title>Temperature Converter</title>
   </head>
   <body>
-    <div class="main-div">
-      <div class="center">
-        <h1 class="heading">Enter Temperature</h1>
-        <div class="first">
-          <label class="temp" for="tempInput">Degree</label>
-          <div class="m-first">
-            <input
-              type="number"
-              id="temperatureInput"
-              class="tempInput"
-              oninput="convertTemperature()"
-              step="0.001"
-            />
-            <label for="fromUnit"></label>
+    <section id="m-sec">
+      <div class="main-div">
+        <div class="center">
+          <h1 class="heading">Enter Temperature</h1>
+          <div class="first">
+            <label class="temp" for="tempInput">Degree</label>
+            <div class="m-first">
+              <input
+                type="number"
+                id="temperatureInput"
+                class="tempInput"
+                oninput="convertTemperature()"
+                step="0.001"
+              />
+              <label for="fromUnit"></label>
+              <select
+                id="fromUnit"
+                class="new-dropdown"
+                onchange="convertTemperature()"
+              >
+                <option value="celsius">C</option>
+                <option value="fahrenheit">F</option>
+                <option value="kelvin">K</option>
+              </select>
+            </div>
+          </div>
+          <div class="second">
+            <label class="color" for="toUnit">Convert Into</label>
             <select
-              id="fromUnit"
-              class="new-dropdown"
+              id="toUnit"
+              class="unitSelect"
               onchange="convertTemperature()"
             >
-              <option value="celsius">C</option>
-              <option value="fahrenheit">F</option>
-              <option value="kelvin">K</option>
+              <option value="celsius">Celsius</option>
+              <option value="fahrenheit">Fahrenheit</option>
+              <option value="kelvin">kelvin</option>
             </select>
           </div>
+          <br />
         </div>
-        <div class="second">
-          <label class="color" for="toUnit">Convert Into</label>
-          <select
-            id="toUnit"
-            class="unitSelect"
-            onchange="convertTemperature()"
-          >
-            <option value="celsius">Celsius</option>
-            <option value="fahrenheit">Fahrenheit</option>
-            <option value="kelvin">kelvin</option>
-          </select>
+        <div class="new-div">
+          <p class="footer" id="result"></p>
         </div>
-        <br />
       </div>
-      <div class="new-div">
-        <p class="footer" id="result"></p>
-      </div>
-    </div>
-
+    </section>
     <script>
       function convertTemperature() {
         const fromUnit = document.getElementById("fromUnit").value;
@@ -60,27 +61,27 @@
         );
 
         let result;
-      if (fromUnit === 'celsius' && toUnit === 'fahrenheit') {
-        result = (inputValue * 9 / 5) + 32;
-      } else if (fromUnit === 'fahrenheit' && toUnit === 'celsius') {
-        result = (inputValue - 32) * 5 / 9;
-      } else if (fromUnit === 'celsius' && toUnit === 'kelvin') {
-        result = inputValue + 273.15;
-      } else if (fromUnit === 'kelvin' && toUnit === 'celsius') {
-        result = inputValue - 273.15;
-      } else if (fromUnit === 'fahrenheit' && toUnit === 'kelvin') {
-        result = (inputValue - 32) * 5 / 9 + 273.15;
-      } else if (fromUnit === 'kelvin' && toUnit === 'fahrenheit') {
-        result = (inputValue - 273.15) * 9 / 5 + 32;
-      } else {
-        result = inputValue;
-      }
+        if (fromUnit === "celsius" && toUnit === "fahrenheit") {
+          result = (inputValue * 9) / 5 + 32;
+        } else if (fromUnit === "fahrenheit" && toUnit === "celsius") {
+          result = ((inputValue - 32) * 5) / 9;
+        } else if (fromUnit === "celsius" && toUnit === "kelvin") {
+          result = inputValue + 273.15;
+        } else if (fromUnit === "kelvin" && toUnit === "celsius") {
+          result = inputValue - 273.15;
+        } else if (fromUnit === "fahrenheit" && toUnit === "kelvin") {
+          result = ((inputValue - 32) * 5) / 9 + 273.15;
+        } else if (fromUnit === "kelvin" && toUnit === "fahrenheit") {
+          result = ((inputValue - 273.15) * 9) / 5 + 32;
+        } else {
+          result = inputValue;
+        }
 
         document.getElementById("result").textContent = `${result.toFixed(
           3
         )}°${toUnit.toUpperCase()}`;
       }
-      
+
       convertTemperature();
     </script>
   </body>
